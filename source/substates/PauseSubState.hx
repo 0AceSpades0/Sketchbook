@@ -22,6 +22,7 @@ class PauseSubState extends MusicBeatSubstate
 		'Resume', 
 		'Restart Song',
 		#if TOUCH_CONTROLS_ALLOWED 'Chart Editor', #end
+		'Gameplay Changers',
 		'Options', 
 		'Exit to menu'
 	];
@@ -369,6 +370,9 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.instance.botplayTxt.visible = PlayState.instance.cpuControlled;
 					PlayState.instance.botplayTxt.alpha = 1;
 					PlayState.instance.botplaySine = 0;
+				case 'Gameplay Changers':
+					close();
+					PlayState.instance.openChangersMenu();
 				case 'Options':
 					PlayState.instance.paused = true; // For lua
 					PlayState.instance.vocals.volume = 0;

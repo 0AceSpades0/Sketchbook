@@ -302,6 +302,34 @@ class PlayState extends MusicBeatState
 		}
 		nextReloadAll = false;
 
+		if (ClientPrefs.data.scoreTxtType == 'Kade'){
+			ratingStuff = [
+				['F', 0.2], //From 0% to 19%
+				['E', 0.4], //From 20% to 39%
+				['D', 0.5], //From 40% to 49%
+				['C', 0.6], //From 50% to 59%
+				['B', 0.69], //From 60% to 68%
+				['A', 0.7], //69%
+				['AA', 0.8], //From 70% to 79%
+				['AAA', 0.9], //From 80% to 89%
+				['AAAA', 1], //From 90% to 99%
+				['AAAAA', 1] //The value on this one isn't used actually, since Perfect is always "1"
+			];
+		}else{
+			ratingStuff = [
+				['You Suck!', 0.2], //From 0% to 19%
+				['Shit', 0.4], //From 20% to 39%
+				['Bad', 0.5], //From 40% to 49%
+				['Bruh', 0.6], //From 50% to 59%
+				['Meh', 0.69], //From 60% to 68%
+				['Nice', 0.7], //69%
+				['Good', 0.8], //From 70% to 79%
+				['Great', 0.9], //From 80% to 89%
+				['Sick!', 1], //From 90% to 99%
+				['Perfect!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
+		 	];
+		}
+
 		setOnScripts('addBehindGF', addBehindGF);
 		setOnScripts('addBehindDad', addBehindDad);
 		setOnScripts('addBehindBF', addBehindBF);
@@ -1265,9 +1293,6 @@ class PlayState extends MusicBeatState
 		}else if (ClientPrefs.data.scoreTxtType == 'Kade'){
 			if(!instakillOnMiss) tempScore = "Score: " + FlxStringUtil.formatMoney(songScore, false, true) + " | Combo Breaks: " + FlxStringUtil.formatMoney(songMisses, false, true) + " | Accuracy: " + CoolUtil.floorDecimal(ratingPercent * 100, 2) + "%" + " | "  + Language.getPhrase('rating_$ratingName', ratingName);
 			else tempScore = "Score: " + FlxStringUtil.formatMoney(songScore, false, true) + " | Accuracy: " + CoolUtil.floorDecimal(ratingPercent * 100, 2) + "%" + " | " + Language.getPhrase('rating_$ratingName', ratingName);
-			if (totalPlayed != 0){
-				scoreTxt.text += " - " + Language.getPhrase(ratingFC);
-			}
 		}else{
 			if(!instakillOnMiss) tempScore = "Score: " + FlxStringUtil.formatMoney(songScore, false, true) + " | Misses: " + FlxStringUtil.formatMoney(songMisses, false, true) + " | Rating: " + str;
 			else tempScore = "Score: " + FlxStringUtil.formatMoney(songScore, false, true) + " | Rating: " + str;
@@ -1716,6 +1741,24 @@ class PlayState extends MusicBeatState
 	override function closeSubState()
 	{
 		super.closeSubState();
+
+		// Gameplay settings
+		playbackRate = ClientPrefs.getGameplaySetting('songspeed');
+		healthGain = ClientPrefs.getGameplaySetting('healthgain');
+		healthLoss = ClientPrefs.getGameplaySetting('healthloss');
+		instakillOnMiss = ClientPrefs.getGameplaySetting('instakill');
+		practiceMode = ClientPrefs.getGameplaySetting('practice');
+		cpuControlled = ClientPrefs.getGameplaySetting('botplay');
+		guitarHeroSustains = ClientPrefs.data.guitarHeroSustains;
+
+		songSpeedType = ClientPrefs.getGameplaySetting('scrolltype');
+		switch(songSpeedType)
+		{
+			case "multiplicative":
+				songSpeed = SONG.speed * ClientPrefs.getGameplaySetting('scrollspeed');
+			case "constant":
+				songSpeed = ClientPrefs.getGameplaySetting('scrollspeed');
+		}
 		
 		stagesFunc(function(stage:BaseStage) stage.closeSubState());
 		if (paused)
@@ -2086,6 +2129,29 @@ class PlayState extends MusicBeatState
 		#if DISCORD_ALLOWED
 		if(autoUpdateRPC) DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
 		#end
+	}
+
+	public function openChangersMenu()
+	{
+		FlxG.camera.followLerp = 0;
+		persistentUpdate = false;
+		persistentDraw = true;
+		paused = true;
+		if(FlxG.sound.music != null) {
+			FlxG.sound.music.pause();
+			vocals.pause();
+			opponentVocals.pause();
+		}
+		if(!cpuControlled)
+		{
+			for (note in playerStrums)
+				if(note.animation.curAnim != null && note.animation.curAnim.name != 'static')
+				{
+					note.playAnim('static');
+					note.resetAnim = 0;
+				}
+		}
+		openSubState(new options.GameplayChangersSubstate());
 	}
 
 	public function openChartEditor()
