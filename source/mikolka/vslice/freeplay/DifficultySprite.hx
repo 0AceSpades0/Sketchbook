@@ -21,13 +21,19 @@ import mikolka.compatibility.funkin.FunkinPath as Paths;
  
          difficultyId = diffId;
          var tex:FlxGraphic = null;
-         tex = Paths.noGpuImage('freeplay/freeplayDifficulties/freeplay' + diffId);
 
          if(tex == null){
              tex = Paths.noGpuImage('menudifficulties/' + diffId);
          }
-         hasValidTexture = (tex != null);
-         if(hasValidTexture) this.loadGraphic(tex);
+         if (sys.FileSystem.exists(backend.Paths.getPath('images/freeplay/freeplayDifficulties/freeplay' + diffId + ".xml"))){
+            frames = Paths.getSparrowAtlas('freeplay/freeplayDifficulties/freeplay' + diffId);
+            animation.addByPrefix("idle", "idle", 24, true);
+			animation.play("idle");
+         }else{
+            tex = Paths.noGpuImage('freeplay/freeplayDifficulties/freeplay' + diffId);
+            hasValidTexture = (tex != null);
+            if(hasValidTexture) this.loadGraphic(tex);
+         }
          try{
              difficultyColor = hasValidTexture ? CoolUtil.dominantColor(this) : FlxColor.GRAY;
          }

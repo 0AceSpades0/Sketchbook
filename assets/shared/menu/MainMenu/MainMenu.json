@@ -1,10 +1,10 @@
 {
-    "xArray": [640,740,860,860,740],
-    "yArray": [0,120,240,380,530],
+    "xArray": [640,740,860,860,740,40],
+    "yArray": [0,120,240,380,530,10],
     "backgroundSprite": "menuBG",
     "selectedSprite": "menuDesat",
     "selectedColor": "0xFFfd719b",
-    "version": "0.1-BETA",
+    "version": "0.1.1-BETA",
     "allowArtworks": false,
     "artWorkScale": 1,
     "artworkX": 0,

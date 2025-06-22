@@ -399,7 +399,13 @@ class StoryMenuState extends MusicBeatState
 
 		if(sprDifficulty.graphic != newImage)
 		{
-			sprDifficulty.loadGraphic(newImage);
+			if (sys.FileSystem.exists(backend.Paths.getPath('images/menudifficulties/' + Paths.formatToSongPath(diff) + ".xml"))){
+            	sprDifficulty.frames = Paths.getSparrowAtlas('menudifficulties/' + Paths.formatToSongPath(diff));
+            	sprDifficulty.animation.addByPrefix("idle", "idle", 24, true);
+				sprDifficulty.animation.play("idle");
+         	}else{
+            	sprDifficulty.loadGraphic(newImage);
+        	}
 			sprDifficulty.x = leftArrow.x + 60;
 			sprDifficulty.x += (308 - sprDifficulty.width) / 3;
 			sprDifficulty.alpha = 0;

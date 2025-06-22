@@ -5,6 +5,8 @@ import backend.WeekData;
 import backend.Highscore;
 import backend.Song;
 
+import mikolka.compatibility.VsliceOptions;
+
 import flixel.util.FlxStringUtil;
 import flixel.addons.transition.FlxTransitionableState;
 
@@ -20,7 +22,6 @@ class PauseSubState extends MusicBeatSubstate
 		'Resume', 
 		'Restart Song',
 		#if TOUCH_CONTROLS_ALLOWED 'Chart Editor', #end
-	 	'Change Difficulty', 
 		'Options', 
 		'Exit to menu'
 	];
@@ -35,6 +36,8 @@ class PauseSubState extends MusicBeatSubstate
 
 	var missingTextBG:FlxSprite;
 	var missingText:FlxText;
+
+	var sprDifficulty:FlxSprite;
 
 	var inVid:Bool;
 	public var cutscene_allowSkipping = true;
@@ -62,7 +65,6 @@ class PauseSubState extends MusicBeatSubstate
 	override function create()
 	{
 		controls.isInSubstate = true;
-		if(Difficulty.list.length < 2) menuItemsOG.remove('Change Difficulty'); //No need to change difficulty if there is only one!
 
 		if(PlayState.chartingMode)
 		{
@@ -120,16 +122,16 @@ class PauseSubState extends MusicBeatSubstate
 		levelInfo.updateHitbox();
 		add(levelInfo);
 
-		var levelDifficulty:FlxText = new FlxText(20, 15 + 32, 0, Language.getPhrase("pause_difficulty","Difficulty: {1}",[CoolUtil.FUL(Difficulty.getString())]), 32);
+		/*var levelDifficulty:FlxText = new FlxText(20, 15 + 32, 0, Language.getPhrase("pause_difficulty","Difficulty: {1}",[CoolUtil.FUL(Difficulty.getString())]), 32);
 		levelDifficulty.scrollFactor.set();
 		levelDifficulty.setFormat(Paths.font('vcr.ttf'), 32);
 		levelDifficulty.updateHitbox();
-		add(levelDifficulty);
+		add(levelDifficulty);*/
 
 		
 		var ballsTxt = inVid ? Language.getPhrase("pause_branding",'{1} Paused',[cutscene_branding]) : 
 			Language.getPhrase("blueballed", "{1} Blue Balls", [PlayState.deathCounter]);
-		var blueballedTxt:FlxText = new FlxText(20, 15 + 64, 0, ballsTxt , 32);
+		var blueballedTxt:FlxText = new FlxText(20, 15 + 32, 0, ballsTxt , 32);
 		blueballedTxt.scrollFactor.set();
 		blueballedTxt.setFormat(Paths.font('vcr.ttf'), 32);
 		blueballedTxt.updateHitbox();
@@ -152,17 +154,28 @@ class PauseSubState extends MusicBeatSubstate
 		chartingText.visible = PlayState.chartingMode;
 		add(chartingText);
 
+		sprDifficulty = new FlxSprite(1030, 100);
+		if (sys.FileSystem.exists(backend.Paths.getPath('images/freeplay/freeplayDifficulties/freeplay' + Difficulty.getString().toLowerCase() + ".xml"))){
+        	sprDifficulty.frames = Paths.getSparrowAtlas('freeplay/freeplayDifficulties/freeplay' + Difficulty.getString().toLowerCase());
+        	sprDifficulty.animation.addByPrefix("idle", "idle", 24, true);
+			sprDifficulty.animation.play("idle");
+        }else{
+        	sprDifficulty.loadGraphic(Paths.image("freeplay/freeplayDifficulties/freeplay" + Difficulty.getString().toLowerCase()));
+        }
+		sprDifficulty.antialiasing = VsliceOptions.ANTIALIASING;
+		add(sprDifficulty);
+
 		blueballedTxt.alpha = 0;
-		levelDifficulty.alpha = 0;
+		//levelDifficulty.alpha = 0;
 		levelInfo.alpha = 0;
 
 		levelInfo.x = FlxG.width - (levelInfo.width + 20);
-		levelDifficulty.x = FlxG.width - (levelDifficulty.width + 20);
+		//levelDifficulty.x = FlxG.width - (levelDifficulty.width + 20);
 		blueballedTxt.x = FlxG.width - (blueballedTxt.width + 20);
 
 		FlxTween.tween(bg, {alpha: 0.6}, 0.4, {ease: FlxEase.quartInOut});
 		FlxTween.tween(levelInfo, {alpha: 1, y: 20}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.3});
-		FlxTween.tween(levelDifficulty, {alpha: 1, y: levelDifficulty.y + 5}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.5});
+		//FlxTween.tween(levelDifficulty, {alpha: 1, y: levelDifficulty.y + 5}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.5});
 		FlxTween.tween(blueballedTxt, {alpha: 1, y: blueballedTxt.y + 5}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.7});
 
 		grpMenuShit = new FlxTypedGroup<Alphabet>();

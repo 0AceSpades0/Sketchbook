@@ -1,120 +1,120 @@
 {
 	"animations": {
-		"purple": {
-			"offsets": [
-				50,
-				35
-			],
-			"noteData": 0,
-			"fps": [
-				22,
-				26
-			],
-			"prefix": "splash",
-			"indices": [],
-			"name": "purple"
-		},
 		"blue2": {
+			"noteData": 5,
 			"offsets": [
 				45,
 				20
 			],
-			"noteData": 5,
 			"fps": [
 				22,
 				26
 			],
 			"prefix": "splash",
-			"indices": [],
-			"name": "blue2"
+			"name": "blue2",
+			"indices": []
 		},
-		"red": {
+		"purple": {
+			"noteData": 0,
 			"offsets": [
-				40,
+				50,
 				35
 			],
-			"noteData": 3,
 			"fps": [
 				22,
 				26
 			],
 			"prefix": "splash",
-			"indices": [],
-			"name": "red"
+			"name": "purple",
+			"indices": []
 		},
 		"red2": {
+			"noteData": 7,
 			"offsets": [
 				40,
 				35
 			],
-			"noteData": 7,
 			"fps": [
 				22,
 				26
 			],
 			"prefix": "splash",
-			"indices": [],
-			"name": "red2"
+			"name": "red2",
+			"indices": []
 		},
-		"purple2": {
+		"red": {
+			"noteData": 3,
 			"offsets": [
-				50,
+				40,
 				35
 			],
-			"noteData": 4,
 			"fps": [
 				22,
 				26
 			],
 			"prefix": "splash",
-			"indices": [],
-			"name": "purple2"
+			"name": "red",
+			"indices": []
 		},
 		"blue": {
+			"noteData": 1,
 			"offsets": [
 				45,
 				20
 			],
-			"noteData": 1,
 			"fps": [
 				22,
 				26
 			],
 			"prefix": "splash",
-			"indices": [],
-			"name": "blue"
+			"name": "blue",
+			"indices": []
 		},
-		"green": {
+		"purple2": {
+			"noteData": 4,
 			"offsets": [
-				45,
-				25
+				50,
+				35
 			],
-			"noteData": 2,
 			"fps": [
 				22,
 				26
 			],
 			"prefix": "splash",
-			"indices": [],
-			"name": "green"
+			"name": "purple2",
+			"indices": []
 		},
 		"green2": {
+			"noteData": 6,
 			"offsets": [
 				45,
 				25
 			],
-			"noteData": 6,
 			"fps": [
 				22,
 				26
 			],
 			"prefix": "splash",
-			"indices": [],
-			"name": "green2"
+			"name": "green2",
+			"indices": []
+		},
+		"green": {
+			"noteData": 2,
+			"offsets": [
+				45,
+				25
+			],
+			"fps": [
+				22,
+				26
+			],
+			"prefix": "splash",
+			"name": "green",
+			"indices": []
 		}
 	},
 	"allowRGB": true,
 	"allowPixel": true,
 	"rgb": null,
-	"scale": 0.8
+	"scale": 1
 }
