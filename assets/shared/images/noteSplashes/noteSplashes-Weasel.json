@@ -1,0 +1,64 @@
+{
+	"animations": {
+		"purple": {
+			"prefix": "note splash weasel purple 10",
+			"offsets": [
+				-63,
+				-64
+			],
+			"indices": [],
+			"fps": [
+				22,
+				26
+			],
+			"name": "purple",
+			"noteData": 0
+		},
+		"blue": {
+			"prefix": "note splash weasel blue 10",
+			"offsets": [
+				-63,
+				-64
+			],
+			"indices": [],
+			"fps": [
+				22,
+				26
+			],
+			"name": "blue",
+			"noteData": 1
+		},
+		"green": {
+			"prefix": "note splash weasel green 10",
+			"offsets": [
+				-63,
+				-64
+			],
+			"indices": [],
+			"fps": [
+				22,
+				26
+			],
+			"name": "green",
+			"noteData": 2
+		},
+		"red": {
+			"prefix": "note splash weasel red 10",
+			"offsets": [
+				-63,
+				-64
+			],
+			"indices": [],
+			"fps": [
+				22,
+				26
+			],
+			"name": "red",
+			"noteData": 3
+		}
+	},
+	"allowRGB": true,
+	"allowPixel": true,
+	"rgb": null,
+	"scale": 1
+}

@@ -2,3 +2,4 @@ Future
 Chip
 Cherry
 CherryDark
+Funkadelix

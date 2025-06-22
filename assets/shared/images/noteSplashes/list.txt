@@ -5,3 +5,4 @@ Vanilla
 NightmareVision
 Andro
 Cherry
+Weasel

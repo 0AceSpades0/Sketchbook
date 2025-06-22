@@ -902,12 +902,12 @@ class PlayState extends MusicBeatState
 		#end
 
 		// HScript
+		for (ext in hscriptExts){
 		#if HSCRIPT_ALLOWED
 		var doPush:Bool = false;
-		var scriptFile:String = 'characters/' + name;
-		for (ext in hscriptExts){
+		var scriptFile:String = 'characters/' + name + ext;
 		#if MODS_ALLOWED
-		var replacePath:String = Paths.modFolders(scriptFile + ext);
+		var replacePath:String = Paths.modFolders(scriptFile);
 		if(NativeFileSystem.exists(replacePath))
 		{
 			scriptFile = replacePath;
@@ -916,7 +916,7 @@ class PlayState extends MusicBeatState
 		else
 		#end
 		{
-			scriptFile = Paths.getSharedPath(scriptFile + ext);
+			scriptFile = Paths.getSharedPath(scriptFile);
 			if(NativeFileSystem.exists(scriptFile))
 				doPush = true;
 		}
