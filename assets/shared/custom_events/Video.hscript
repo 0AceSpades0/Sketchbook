@@ -1,0 +1,12 @@
+var midSong:Bool = true;
+var canSkip:Bool = false;
+var loop:Bool = false;
+var playOnLoad:Bool = true;
+var behindUI:Bool = true;
+
+function onCreate(){}
+
+function onEvent(eventName:String, value1:String, value2:String, strumTime:Float){
+    if (eventName == 'Video')
+        startVideo(value1, midSong, canSkip, loop, playOnLoad, behindUI);
+}
