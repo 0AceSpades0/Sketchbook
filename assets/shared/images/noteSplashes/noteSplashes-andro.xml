@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="AndroSplash.png">
+	<!-- Created with Adobe Animate version 23.0.0.407 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="splash0000" x="0" y="0" width="396" height="373"/>
+	<SubTexture name="splash0001" x="396" y="0" width="396" height="373"/>
+	<SubTexture name="splash0002" x="792" y="0" width="396" height="373"/>
+	<SubTexture name="splash0003" x="1188" y="0" width="396" height="373"/>
+	<SubTexture name="splash0004" x="1584" y="0" width="396" height="373"/>
+	<SubTexture name="splash0005" x="0" y="373" width="396" height="373"/>
+</TextureAtlas>

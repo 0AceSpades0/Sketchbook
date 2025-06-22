@@ -1,0 +1,6 @@
+{
+    "name": "Downscroll",
+    "desc": "If checked, notes go Down instead of Up, simple enough.",
+    "variable": "downScroll",
+    "type": "BOOL"
+}

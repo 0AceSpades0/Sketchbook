@@ -1,0 +1,21 @@
+function onCreate(){}
+
+function onCreatePost(){}
+
+function onUpdate(){}
+
+function onUpdatePost(){}
+
+function onChangeArtwork(){}
+
+function onChangeArtworkPost(){}
+
+function onChangeItem(){}
+
+function onChangeItemPost(){}
+
+function onSelected(){}
+
+function onSelectedPost(){}
+
+function onSelectedPre(){}
