@@ -127,7 +127,6 @@ class FreeplayHelpers {
 					);
                 @:privateAccess{
                     state.busy = false;
-					state.letterSort.inputEnabled = true;
                 }
 				return;
 			}

@@ -12,10 +12,11 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		title = Language.getPhrase('graphics_menu', 'Graphics Settings');
 		rpcTitle = 'Graphics Settings Menu'; //for Discord Rich Presence
 
-		boyfriend = new Character(840, 170, 'bf', true);
+		boyfriend = new Character(840, 170, 'placeman', true);
 		boyfriend.setGraphicSize(Std.int(boyfriend.width * 0.75));
 		boyfriend.updateHitbox();
 		boyfriend.dance();
+		boyfriend.flipX = true;
 		boyfriend.animation.finishCallback = function (name:String) boyfriend.dance();
 		boyfriend.visible = false;
 

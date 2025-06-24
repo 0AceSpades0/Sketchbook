@@ -178,7 +178,6 @@ class FreeplayState extends MusicBeatSubstate
 
 	var charSelectHint:FlxText;
 
-	var letterSort:LetterSort;
 	var exitMovers:ExitMoverData = new Map();
 
 	var exitMoversCharSel:ExitMoverData = new Map();
@@ -262,6 +261,7 @@ class FreeplayState extends MusicBeatSubstate
 	override function create():Void
 	{
 		// ? Psych might've reloaded the mod list. Make sure we select current character's mod for the style
+		FlxG.mouse.visible = false;
 		SongMenuItem.reloadGlobalItemData();
 		var saveBox = VsliceOptions.LAST_MOD;
 		if (ModsHelper.isModDirEnabled(saveBox.mod_dir))
@@ -297,7 +297,6 @@ class FreeplayState extends MusicBeatSubstate
 		funnyCam = new FunkinCamera('freeplayFunny', 0, 0, FlxG.width, FlxG.height);
 		grpCapsules = new FlxTypedGroup<SongMenuItem>();
 		grpDifficulties = new FlxTypedSpriteGroup<DifficultySprite>(-300, 80);
-		letterSort = new LetterSort(400, 75);
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		rankBg = new FunkinSprite(0, 0);
 		rankVignette = new FlxSprite(0, 0).loadGraphic(Paths.image('freeplay/rankVignette'));
@@ -574,44 +573,6 @@ class FreeplayState extends MusicBeatSubstate
 		txtCompletion.visible = false;
 		add(txtCompletion);
 
-		add(letterSort);
-		letterSort.visible = false;
-
-		exitMovers.set([letterSort], {
-			y: -100,
-			speed: 0.3
-		});
-
-		exitMoversCharSel.set([letterSort], {
-			y: -270,
-			speed: 0.8,
-			wait: 0.1
-		});
-
-		letterSort.changeSelectionCallback = (str) ->
-		{
-			switch (str)
-			{
-				case 'fav':
-					generateSongList({filterType: FAVORITE}, true);
-				case 'ALL':
-					generateSongList(null, true);
-				case '#':
-					generateSongList({filterType: REGEXP, filterData: '0-9'}, true);
-				default:
-					generateSongList({filterType: REGEXP, filterData: str}, true);
-			}
-
-			// We want to land on the first song of the group, rather than random song when changing letter sorts
-			// that is, only if there's more than one song in the group!
-			if (grpCapsules.members.length > 0)
-			{
-				FunkinSound.playOnce(Paths.sound('scrollMenu'), 0.4);
-				curSelected = 1;
-				changeSelection();
-			}
-		};
-
 		exitMovers.set([fp, txtCompletion, fnfHighscoreSpr, clearBoxSprite], {
 			x: FlxG.width,
 			speed: 0.3
@@ -675,7 +636,6 @@ class FreeplayState extends MusicBeatSubstate
 
 			diffSelLeft.visible = true;
 			diffSelRight.visible = true;
-			letterSort.visible = true;
 
 			exitMovers.set([diffSelLeft, diffSelRight], {
 				x: -diffSelLeft.width * 2,
@@ -2011,7 +1971,6 @@ class FreeplayState extends MusicBeatSubstate
 		trace('RANDOM SELECTED');
 
 		busy = true;
-		letterSort.inputEnabled = false;
 
 		var availableSongCapsules:Array<SongMenuItem> = grpCapsules.members.filter(function(cap:SongMenuItem)
 		{
@@ -2027,7 +1986,6 @@ class FreeplayState extends MusicBeatSubstate
 		{
 			trace('No songs available!');
 			busy = false;
-			letterSort.inputEnabled = true;
 			FunkinSound.playOnce(Paths.sound('cancelMenu'));
 			return;
 		}
@@ -2102,7 +2060,6 @@ class FreeplayState extends MusicBeatSubstate
 	function capsuleOnConfirmDefault(cap:SongMenuItem, ?targetInstId:String):Void
 	{
 		busy = true;
-		letterSort.inputEnabled = false;
 
 		PlayState.isStoryMode = false;
 

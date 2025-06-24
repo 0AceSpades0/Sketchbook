@@ -125,6 +125,8 @@ class CharSelectSubState extends MusicBeatSubState
   {
     super.create();
 
+    FlxG.mouse.visible = true;
+
     bopInfo = FramesJSFLParser.parse("images/charSelect/iconBopInfo/iconBopInfo.txt");
 
     var bg:FlxSprite = new FlxSprite(-153, -140);

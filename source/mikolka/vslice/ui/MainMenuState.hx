@@ -209,6 +209,22 @@ class MainMenuState extends MusicBeatState
 		//FlxG.camera.follow(camFollow, null, 0.06);
 	}
 
+	override public function beatHit():Void
+	{
+		super.beatHit();
+		if(hscript.exists('onBeatHit'))
+			hscript.call('onBeatHit');
+		hscript.set('curBeat', curBeat);
+	}
+
+	override public function stepHit():Void
+	{
+		super.stepHit();
+		if(hscript.exists('onStepHit'))
+			hscript.call('onStepHit');
+		hscript.set('curStep', curStep);
+	}
+
 	public var selectedSomethin:Bool = false;
 
 	override function update(elapsed:Float)
@@ -309,6 +325,9 @@ class MainMenuState extends MusicBeatState
 									PlayState.SONG.splashSkin = null;
 									#if !LEGACY_PSYCH PlayState.stageUI = 'normal'; #end
 								}
+							default:
+								if(hscript.exists('onEnter'))
+									hscript.call('onEnter');
 						}
 					});
 

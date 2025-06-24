@@ -335,6 +335,7 @@ class PlayState extends MusicBeatState
 		setOnScripts('addBehindBF', addBehindBF);
 		setOnScripts('addBehindNotes', addBehindNotes);
 		setOnScripts('startVideo', startVideo);
+		setOnScripts('addCharacterToList', addCharacterToList);
 
 		startCallback = startCountdown;
 		endCallback = endSong;
@@ -477,6 +478,15 @@ class PlayState extends MusicBeatState
 			add(dadGroup);
 			add(boyfriendGroup);
 		}
+
+		setOnScripts('dad', dad);
+		setOnScripts('dadGroup', dadGroup);
+
+		setOnScripts('gf', gf);
+		setOnScripts('gfGroup', gfGroup);
+
+		setOnScripts('boyfriend', boyfriend);
+		setOnScripts('boyfriendGroup', boyfriendGroup);
 		
 		#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
 		// "SCRIPTS FOLDER" SCRIPTS
